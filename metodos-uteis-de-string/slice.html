@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Trabalhando com slice</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			outline: none;
+		}
+		form {
+			display: flex;
+			align-items: center;
+			margin-top: 20px;
+		}
+		input, button {
+			padding: 5px 10px;
+			border: 2px solid orange;
+			border-right: none;
+		}
+		button {
+			background-color: orange;
+			color: white;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<h1>Utilizando o método slice</h1>
+	<form>
+		Nome completo: <input type="text" placeholder="Informe seu nome completo" name="input-nome-completo" autofocus>
+		<button type="button" id="btn-enviar">Enviar</button>
+	</form>
+
+	<script>
+		// Elementos DOM
+		let btnEnviar = document.getElementById('btn-enviar')
+
+		// Eventos DOM
+		btnEnviar.addEventListener('click', apresentar)
+
+		function nomeCompletoValido(nomeCompleto) {
+			if (nomeCompleto.length > 0) {
+				return true
+			}
+			return false
+		}
+
+		function pegarNome(nomeCompleto) {
+			let primeiroEspaco = nomeCompleto.indexOf(' ')
+			let nome = nomeCompleto.slice(0, primeiroEspaco)
+			return nome
+		}
+
+		function apresentar() {
+			let inputNomeCompleto = document.getElementsByName('input-nome-completo')[0]
+
+			let nomeCompleto = inputNomeCompleto.value
+
+			if (nomeCompletoValido(nomeCompleto)) {
+				alert(`É um prazer em conhecê-lo(a), ${ pegarNome(nomeCompleto) }!!`)
+			} else {
+				console.error('ERRO: Nenhum nome informado.')
+			}
+		}
+	</script>
+</body>
+</html>
