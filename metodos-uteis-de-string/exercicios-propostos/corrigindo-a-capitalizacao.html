@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Corrigindo a capitalização</title>
+</head>
+<body>
+	<h1>Corrigindo a capitalização</h1>
+	<h2>Antes</h2>
+	<ul>
+		<li>lonDon</li>
+		<li>ManCHESTer</li>
+		<li>BiRmiNGHAM</li>
+		<li>liVERpoOL</li>
+	</ul>
+	<h2>Depois</h2>
+	<ul type="square" name="cidades-corrigidas">
+	</ul>
+	<button type="button" onclick="corrigirNomes()">Corrigir</button>
+
+	<script>
+		let listaCidades = ['lonDon', 'ManCHESTer', 'BiRmiNGHAM', 'liVERpoOL']
+
+		function corrigirNomes() {
+			let ulCidades = document.getElementsByName('cidades-corrigidas')[0]
+			for (let indice in listaCidades) {
+				let cidade = listaCidades[indice].toLowerCase()
+				let primeiroLetra = cidade[0].toUpperCase()
+				let restoPalavra = cidade.slice(1)
+				let cidadeResultado = primeiroLetra + restoPalavra
+				let liCidade = document.createElement('li')
+				liCidade.innerText = cidadeResultado
+				ulCidades.appendChild(liCidade)
+			}
+		}
+	</script>
+</body>
+</html>
