@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Filtrando mensagens de saudação</title>
+	<style>
+	* {
+		font-size: 100%;
+		font-family: Arial;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		outline: none;
+		list-style-position: inside;
+	}
+	body {
+		background-color: rgb(0,230,153);
+	}
+	.input, .btn {
+		padding: 5px 10px;
+		border: solid 2px rgb(0,230,153);
+	}
+	.btn {
+		cursor: pointer;
+		background-color: rgb(0,230,153);
+		color: white;
+		font-weight: bold;
+		border-radius: 5px;
+	}
+	#cabecalho {
+		margin: 20px auto;
+		text-align: center;
+	}
+	#cabecalho h1 {
+		font-size: 2rem;
+	}
+	#principal {
+		background-color: white;
+		width: 400px;
+		border-radius: 10px;
+		margin: 0 auto;
+	}
+	#principal h2 {
+		font-size: 1.5rem;
+		margin-bottom: 5px;
+	}
+	#principal form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 10px;
+		width: 100%;
+	}
+	#principal form textarea {
+		resize: none;
+		border-radius: 5px;
+		margin-top: 5px;
+	}
+	#principal .cadastrar-mensagem .btn {
+		border-top: none;
+		border-radius: 0px 0px 5px 5px;
+	}
+	hr {
+		background-color: rgb(0,230,153);
+		border: none;
+		height: 3px;
+		width: 50%;
+		margin: 0 auto;
+	}
+	#principal .mensagens-cadastradas, .mensagens-filtradas {
+		padding: 10px;
+	}
+	.filtrar-mensagens button {
+		margin-top: 5px;
+	}
+	.cadastrar-mensagem {
+		display: none;
+	}
+</style>
+</head>
+<body>
+	<header id="cabecalho">
+		<h1>Filtrando mensagens de saudação</h1>
+	</header>
+	<main id="principal">
+		<form class="cadastrar-mensagem">
+			<h2>Cadastrar mensagem</h2>
+			<p>Mensagem</p>
+			<textarea name="textarea-mensagem" cols="30" rows="5" placeholder="Digite sua mensagem" class="input" autofocus></textarea>
+			<button type="button" class="btn" onclick="adicionarMensagem()">Adicionar</button>
+		</form>
+		<div class="mensagens-cadastradas">
+			<p>Mensagens cadastradas</p>
+			<ul name="mensagens">
+				
+			</ul>
+		</div>
+		<hr>
+		<form class="filtrar-mensagens">
+			<h2>Filtrar mensagens</h2>
+			<div class="radios-filtro">
+				<label><input type="radio" name="radio-filtro-mensagem" checked> Natal</label>
+				<label><input type="radio" name="radio-filtro-mensagem"> Ano Novo</label>
+			</div>
+			<button type="button" class="btn" onclick="filtrarMensagens()">Filtrar</button>
+		</form>
+		<div class="mensagens-filtradas">
+			<p>Mensagens filtradas</p>
+			<p name="tipo-mensagens-filtradas"></p>
+			<ul name="mensagens-filtradas">
+				
+			</ul>
+		</div>
+	</main>
+
+	<script>
+		let mensagensCadastradas = []
+
+		function mensagemValida(mensagem) {
+			return mensagem.length > 0
+		}
+
+		function gerarTagsHTML(tipo, conteudo) {
+			let elemento = document.createElement(tipo)
+			elemento.innerText = conteudo
+			return elemento
+		}
+
+		function mostrarMensagensCadastradas() {
+			let ulMensagens = document.getElementsByName('mensagens')[0]
+			let ultimaMensagemCadastrada = mensagensCadastradas[mensagensCadastradas.length - 1]
+			ulMensagens.appendChild(gerarTagsHTML('li', ultimaMensagemCadastrada))
+		}
+
+		function mostrarMensagensFiltradas(tipo) {
+			let tipoMenagem = document.getElementsByName('tipo-mensagens-filtradas')[0]
+			tipoMenagem.innerHTML = `Tipo: <strong>${ tipo.toUpperCase() }</strong>.`
+			let ulMensagensFiltradas = document.getElementsByName('mensagens-filtradas')[0]
+			ulMensagensFiltradas.innerText = ''
+			for (let indice in mensagensCadastradas) {
+				let mensagem = mensagensCadastradas[indice]
+				if (mensagem.toLowerCase().indexOf(tipo) >= 0) {
+					ulMensagensFiltradas.appendChild(gerarTagsHTML('li', mensagem))
+				}
+			}
+		}
+
+		function verificarOpcaoFiltro(inputFiltro) {
+			for (let indice in inputFiltro) {
+				if (inputFiltro[indice].checked) {
+					return parseInt(indice)
+				}
+			}
+			return 2
+		}
+
+		function adicionarMensagem() {
+			let textAreaMensagem = document.getElementsByName('textarea-mensagem')[0]
+			let mensagem = textAreaMensagem.value
+			if (mensagemValida(mensagem)) {
+				textAreaMensagem.value = ''
+				mensagensCadastradas.push(mensagem)
+				textAreaMensagem.focus()
+				mostrarMensagensCadastradas()
+			} else {
+				alert('ERRO: Mensagem não digitada.')
+			}
+		}
+
+		function filtrarMensagens() {
+			let inputFiltro = document.getElementsByName('radio-filtro-mensagem')
+			let opcaoSelecionada = verificarOpcaoFiltro(inputFiltro)
+			switch(opcaoSelecionada) {
+				case 0:
+					mostrarMensagensFiltradas('natal')
+					break
+				case 1:
+					mostrarMensagensFiltradas('ano novo')
+					break
+				default:
+					alert("ERRO: Nenhum tipo de mensagem selecionado.")
+					break
+			}
+		}
+	</script>
+</body>
+</html>
