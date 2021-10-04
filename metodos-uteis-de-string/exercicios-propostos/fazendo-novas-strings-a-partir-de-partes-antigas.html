@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Fazendo novas strings a partir de partes antigas</title>
+</head>
+<body>
+	<h1>Fazendo novas strings a partir de partes antigas</h1>
+	<!-- Extrair o código e o nome da estação juntá-las em uma string cm a seguinte estrutura: -->
+	<ul id="informacoes-estacoes">
+		<li>MAN675847583748sjt567654;Manchester Piccadilly</li>
+		<li>GNF576746573fhdg4737dh4;Greenfield</li>
+		<li>LIV5hg65hd737456236dch46dg4;Liverpool Lime Street</li>
+		<li>SYB4f65hf75f736463;Stalybridge</li>
+		<li>HUD5767ghtyfyr4536dh45dg45dg3;Huddersfield</li>
+	</ul>
+	<button type="button" onclick="extrairNomesEstacoes()">Extrair</button>
+	<h2>Resultado da extração</h2>
+	<ul id="lista-estacoes" type="circle"></ul>
+
+	<script>
+		function gerarTagsHTML(tipo, conteudo) {
+			let elemento = document.createElement('li')
+			elemento.innerText = conteudo
+			return elemento
+		}
+
+		function converterInformacaoEstacao(informacao) {
+			let codigoEstacao = informacao.slice(0, 3)
+			let nomeEstacao = informacao.slice(informacao.indexOf(';')+1)
+			return `${ codigoEstacao }: ${ nomeEstacao }`
+		}
+
+		function extrairNomesEstacoes() {
+			let ulInformacoesEstacoes = document.querySelector('ul#informacoes-estacoes')
+			let listaEstacoes = document.querySelector('ul#lista-estacoes')
+
+			let informacoesEstacoes = ulInformacoesEstacoes.children
+			for (let indice = 0; indice < informacoesEstacoes.length; indice++) {
+				let conteudoTag = converterInformacaoEstacao(informacoesEstacoes[indice].textContent)
+				listaEstacoes.appendChild(gerarTagsHTML('li', conteudoTag))
+			}
+		}
+	</script>
+</body>
+</html>
