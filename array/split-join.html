@@ -1,0 +1,22 @@
+<html>
+	<script>
+		function capitalizar(cidades) {
+			let novoArrayCidades = []
+			for (let indice in cidades) {
+				let primeiraLetraConvertida = cidades[indice][0].toUpperCase()
+				let restanteDoNome = cidades[indice].slice(1)
+				novoArrayCidades.push(`${ primeiraLetraConvertida }${ restanteDoNome }`)
+			}
+			return novoArrayCidades
+		}
+		let cidadesString = 'são paulo,são josé dos campos,são caetano do sul,diadema,osasco'
+		document.write(cidadesString + '<br>')
+		document.write('<br>Novo array, já convertido: ')
+		cidadesString.split(',')
+		
+		let cidadesArray = cidadesString.split(',')
+		let arrayCidadesConvertido = capitalizar(cidadesArray)
+		document.write(arrayCidadesConvertido)
+		document.write('<br>Nova string: ' + arrayCidadesConvertido.join(';'))
+	</script>
+</html>
