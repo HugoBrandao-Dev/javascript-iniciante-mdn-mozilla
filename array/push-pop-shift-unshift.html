@@ -1,0 +1,76 @@
+<style>
+* {
+	margin: 0;	
+	padding: 0;
+	list-style: inside;
+}
+input, button {
+	padding: 5px 10px;
+	outline: none;
+}
+.btn-group {
+	margin: 20px auto;
+}
+</style>
+<html>
+Item a ser comprado: <input type="text" name="input-item" placeholder="Nome do item" autofocus>
+<div class="btn-group">
+	<button type="button" onclick="acao(1)">Add no primeiro</button>
+	<button type="button" onclick="acao(0)">Add no ultimo</button>
+	<button type="button" onclick="acao(3)">Remover primeiro</button>
+	<button type="button" onclick="acao(2)">Remover último</button>
+</div>
+<p>Lista de itens a serem comprados:</p>
+<ul id="itens-comprar" type="square">
+
+</ul>
+
+<script>
+	let itens = []
+
+	function gerarTagHTML(tipo, conteudo) {
+		let elemento = document.createElement('li')
+		elemento.innerText = conteudo
+
+		return elemento
+	}
+
+	function mostrarListaItens() {
+		let ulItensComprar = document.querySelector('ul#itens-comprar')
+
+		ulItensComprar.innerText = ''
+
+		for (let indice in itens) {
+			ulItensComprar.appendChild(gerarTagHTML('li', itens[indice]))
+		}
+	}
+
+	function acao(tipoAcao) {
+		let inputItem = document.getElementsByName('input-item')[0]
+
+		let item = inputItem.value
+		switch (tipoAcao) {
+			case 0:
+				itens.push(item)
+				break
+			case 1:
+				// unshift -> ADICIONA, no início do array, um item
+				itens.unshift(item)
+				break
+			case 2:
+				itens.pop()
+				break
+			case 3:
+				// shift -> REMOVE, do início do array, um item
+				itens.shift()
+				break
+			default:
+				console.error('ERRO: Ação inválida')
+		}
+		inputItem.value = ''
+		inputItem.focus()
+
+		mostrarListaItens()
+	}
+</script>
+</html>
