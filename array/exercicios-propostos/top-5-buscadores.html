@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Top 5 buscadores</title>
+	<style>
+	body {
+		margin: 0;
+		padding: 0;
+		font-size: 100%;
+		font-weight: normal;
+		font-family: Tahoma;
+		list-style: inside;
+	}
+	h1 {
+		font-size: 2rem;
+	}
+	input, button {
+		padding: 5px 10px;
+		outline: none;
+		border: 2px solid rgb(0,204,153);
+	}
+	ol {
+		display: flex;
+		flex-direction: column-reverse;
+	}
+	input[name="input-pesquisa"] {
+		border-right: none;
+	}
+	#form-pesquisa {
+		display: flex;
+		padding: 10px;
+	}
+	#btn-pesquisar {
+		background-color: rgb(0,204,153);
+		color: white;
+		cursor: pointer;
+	}
+</style>
+</head>
+<body>
+	<h1>Top 5 buscadores</h1>
+	<form id="form-pesquisa">
+		<input type="search" name="input-pesquisa" placeholder="O que deseja pesquisar?">
+		<button type="button" id="btn-pesquisar">Pesquisar</button>
+	</form>
+	<ol type="1">
+	</ol>
+
+	<script>
+		let pesquisas = []
+		let btnPesquisar = document.querySelector('button#btn-pesquisar')
+		btnPesquisar.addEventListener('click', pesquisar)
+
+		function gerarTagHTML(tipo, conteudo) {
+			let elemento = document.createElement('li')
+			elemento.innerText = conteudo
+			return elemento
+		}
+
+		function mostrarListaPesquisa() {
+			let olPesquisas = document.getElementsByTagName('ol')[0]
+			olPesquisas.innerText = ''
+			for (let indice in pesquisas) {
+				olPesquisas.appendChild(gerarTagHTML('li', pesquisas[indice]))
+			}
+		}
+
+		function pesquisar() {
+			let inputPesquisa = document.getElementsByName('input-pesquisa')[0]
+			pesquisas.push(inputPesquisa.value)
+			if (pesquisas.length > 5) {
+				pesquisas.shift()
+			}
+			mostrarListaPesquisa()
+			inputPesquisa.value = ''
+			inputPesquisa.focus()
+		}
+	</script>
+</body>
+</html>
