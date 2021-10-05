@@ -1,0 +1,80 @@
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	outline: none;
+	list-style: inside;
+}
+input, button {
+	padding: 5px 10px;
+}
+</style>
+<html>
+<form>
+	Produto: <input type="text" name="input-produto" placeholder="Nome do produto" autofocus>
+	Preço: R$<input type="number" name="input-preco">
+	<button type="button" onclick="cadastrarProduto()">Cadastrar</button>
+	<button type="button" onclick="formatarProdutos()">Formatar</button>
+</form>
+<ol id="produtos-cadastrados">
+
+</ol>
+<small>OBS: Os itens só serão visíveis quando formatados.</small>
+<script>
+	let produtos = []
+
+	function gerarTagHTML(tipo, conteudo) {
+		let elemento = document.createElement('li')
+
+		let primeiroLetra = conteudo[0].toUpperCase()
+		let restante = conteudo.slice(1, conteudo.indexOf(':'))
+		let nomeCompleto = primeiroLetra + restante
+		let preco = conteudo.slice(conteudo.indexOf(':') + 1)
+		elemento.innerText = `${ nomeCompleto } - ${ preco }`
+		return elemento
+	}
+
+	function formatarProdutos() {
+		let olProdutosCadastrados = document.querySelector('ol#produtos-cadastrados')
+		olProdutosCadastrados.innerText = ''
+		for (let indice in produtos) {
+			olProdutosCadastrados.appendChild(gerarTagHTML('li', produtos[indice]))
+		}
+	}
+
+	function produtoValido(produto, preco) {
+		if (produto.length == 0 || produto.preco == 0) {
+			alert('Preencha todos os campos necessários.')
+			return false
+		}
+		return true
+	}
+
+	function cadastrarProduto() {
+		let inputProduto = document.getElementsByName('input-produto')[0]
+		let inputPreco = document.getElementsByName('input-preco')[0]
+
+		if (produtoValido(inputProduto.value && inputPreco.value)){
+			let produto = inputProduto.value
+			let preco = Number(inputPreco.value).toLocaleString('pt-BR', {
+				style: 'currency',
+				currency: 'BRL'
+			})
+
+			// for (let indice in produtos) {
+			// 	if (produtos[indice].indexOf(produto) >= 0) {
+			// 		if (confirm(`Produto já cadastrado com preço de ${ preco }, deseja substituir?`)) {
+			// 			produtos[indice] = `${ produto }:${ preco }`
+			// 		}
+			// 	} else {
+			// 		produtos.push(`${ produto }:${ preco }`)
+			// 	}
+			// }
+			produtos.push(`${ produto }:${ preco }`)
+			inputProduto.value = ''
+			inputPreco.value = ''
+			inputProduto.focus()
+		}
+	}
+	</script>
+	</html>
