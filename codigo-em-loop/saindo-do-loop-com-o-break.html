@@ -1,0 +1,65 @@
+<meta charset="UTF-8">
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+	font-family: Tahoma;
+}
+input, button {
+	padding: 5px 10px;
+	border: solid 2px rgb(0,153,255);
+	outline: none;
+}
+input {
+	border-right: none;
+	border-radius: 4px 0px 0px 4px;
+}
+button {
+	background-color: rgb(0,153,255);
+	color: white;
+	border-radius: 0px 4px 4px 0px;
+	text-transform: uppercase;
+	cursor: pointer;
+}
+form {
+	display: flex;
+	align-items: center;
+	padding: 10px;
+}
+</style>
+<html>
+<form>
+	Pesquisar: <input type="search" name="input-pesquisar" placeholder="Nome a ser pesquisado" autofocus>
+	<button type="button" onclick="pesquisarNumero()">Pesquisar</button>
+</form>
+	<p></p>
+
+	<script>
+		let contatos = ['tobias:(11)11111-1111',
+						'josias:(22)22222-2222',
+						'dinorá:(33)33333-3333',
+						'jeremias:(44)44444-4444',
+						'geronimo:(55)55555-5555',
+						'geroncio:(66)66666-6666',
+						]
+
+		function pesquisarNumero() {
+			let pContato = document.getElementsByTagName('p')[0]
+			let inputPesquisar = document.getElementsByName('input-pesquisar')[0]
+			let nome = inputPesquisar.value
+			for (let indice in contatos) {
+				if (contatos[indice].indexOf(nome) >= 0) {
+					let numero = contatos[indice].split(':')[1]
+					pContato.innerHTML = `O telefone de contato de ${ nome } é <strong>${ numero}</strong>.`
+					break
+				} else {
+					// Não utilizar o alert
+					pContato.innerHTML = 'Nenhum número encontrado para o contato informado.'
+				}
+			}
+			inputPesquisar.value = ''
+			inputPesquisar.focus()
+		}
+	</script>
+</html>
