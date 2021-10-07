@@ -1,0 +1,76 @@
+<meta type="UTF-8">
+<style>
+	* {
+		font-family: Arial;
+		font-size: 100%;
+		font-weight: normal;
+	}
+	input, button {
+		padding: 5px 10px;
+		outline: none;
+	}
+	h1 {
+		font-size: 2.5rem;
+	}
+	h2 {
+		font-size: 2rem;
+	}
+	h3 {
+		font-size: 1.5rem;
+	}
+</style>
+<html lang="pt-br">
+	<h1>Funções anônimas</h1>
+	<h2>Selecionando somente pares</h2>
+	<form>
+		Valor: <input type="number" name="input-valor" autofocus>
+		<button type="button" id="btn-adicionar">Add</button>
+		<button type="button" onclick="separarPares()">Separar</button>
+	</form>
+	<h3>Valores cadastrados</h3>
+	<p></p>
+	<h3>Valores pares</h3>
+	<p></p>
+
+	<script>
+		let valores = []
+
+		let btnAdicionar = document.getElementById('btn-adicionar')
+
+		let valorValido = function(valor) {
+			if (isNaN(valor) || valor.length === 0) {
+				return false
+			}
+			return true
+		}
+
+		btnAdicionar.onclick = function() {
+			let inputValor = document.getElementsByName('input-valor')[0]
+
+
+			if (valorValido(inputValor.value)) {
+				let pValores = document.getElementsByTagName('p')[0]
+
+				let valor = Number(inputValor.value)
+				valores.push(valor)
+				pValores.innerHTML += `${ valor } `
+			} else {
+				alert('Informe um valor numérico.')
+			}
+
+			inputValor.value = ''
+			inputValor.focus()
+		}
+
+		let separarPares = function() {
+			let pPares = document.getElementsByTagName('p')[1]
+			for (let indice in valores) {
+				let valor = valores[indice]
+
+				if (valor % 2 == 0) {
+					pPares.innerHTML += `${ valor } `
+				}
+			}
+		}
+	</script>
+</html>
