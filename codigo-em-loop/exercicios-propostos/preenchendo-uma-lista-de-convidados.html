@@ -1,0 +1,127 @@
+<style>
+* {
+	font-weight: normal;
+	font-family: Arial;
+	font-size: 100%;
+	list-style: inside;
+}
+h1 {
+	font-size: 2rem;
+}
+h2 {
+	font-size: 1.5rem;
+}
+small {
+	font-size: 0.6rem;
+}
+input, button {
+	padding: 5px 10px;
+	outline: none;
+}
+ul {
+	text-transform: capitalize;
+}
+#resultado {
+	display: none;
+}
+</style>
+<meta charset="UTF-8">
+<html lang="pt-br">
+<h1>Cadastrar pessoas para a festa</h1>
+<form>
+	Nome: <input type="text" name="input-nome" placeholder="Nome do a ser cadastrado" autofocus>
+	<button type="button" onclick="cadastrarNome()">Cadastrar</button>
+	<button type="button" onclick="gerarLista()">Gerar lista</button>
+</form>
+<div id="pessoas-cadastradas">
+	<h2>Cadastradas</h2>
+	<ul>
+
+	</ul>
+</div>
+<div id="resultado">
+	<h2>Aceitas</h2>
+	<ul>
+
+	</ul>
+	<h2>Não aceitas</h2>
+	<ul>
+
+	</ul>
+</div>
+<small>Phil e Lola, caso cadastrados, não serão aceitos para a festa.</small>
+
+<script>
+	let pessoasCadastradas = []
+
+	function nomeValido(nome) {
+		return nome.length > 0
+	}
+
+	function gerarTagHTML(tipo, conteudo) {
+		let elemento = document.createElement(tipo)
+		elemento.innerHTML = conteudo
+		return elemento
+	}
+
+	function acaoBotao(tipo) {
+		let codigo = parseInt(tipo)
+		let divResultado = document.querySelector('div#resultado')
+		let divPessoasCadastradas = document.querySelector('div#pessoas-cadastradas')
+
+		switch (codigo) {
+			case 0:
+				divResultado.style.display = 'none'
+				divPessoasCadastradas.style.display = 'block'
+				break
+			case 1:
+				divPessoasCadastradas.style.display = 'none'
+				divResultado.style.display = 'block'
+				break
+			default:
+				console.error('ERRO: Ação de botão inválida.')
+				break
+		}
+
+	}
+
+	function cadastrarNome() {
+		let inputNome = document.getElementsByName('input-nome')[0]
+		let ulPessoasCadastradas = document.querySelector("div#pessoas-cadastradas ul")
+
+		let nome = inputNome.value
+
+		if (nomeValido(nome)) {
+			acaoBotao(0)
+			pessoasCadastradas.unshift(nome)
+			ulPessoasCadastradas.appendChild(gerarTagHTML('li', nome))
+			inputNome.value = ''
+			inputNome.focus()
+		} else {
+			alert('Informe o nome para ser cadastro.')
+		}
+	}
+
+	function gerarLista() {
+		let ulPessoasAceitas = document.getElementsByTagName('ul')[1]
+		let ulPessoasNaoAceitas = document.getElementsByTagName('ul')[2]
+
+		if (pessoasCadastradas.length === 0) {
+			alert('Nenhuma pessoas cadastrada.')
+		} else {
+			acaoBotao(1)
+			ulPessoasAceitas.innerHTML = ''
+			ulPessoasNaoAceitas.innerHTML = ''
+			for (let indice in pessoasCadastradas) {
+				let nome = pessoasCadastradas[indice]
+				let nomeConvertido = nome.toLowerCase()
+				if (nomeConvertido === 'phil' || nomeConvertido === 'lola') {
+					ulPessoasNaoAceitas.appendChild(gerarTagHTML('li', nome))
+				} else {
+					ulPessoasAceitas.appendChild(gerarTagHTML('li', nome))
+				}
+			}
+		}
+	}
+</script>
+</html>
