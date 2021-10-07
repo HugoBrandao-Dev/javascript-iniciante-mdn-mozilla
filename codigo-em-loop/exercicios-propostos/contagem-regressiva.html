@@ -1,0 +1,17 @@
+<meta charset="UTF-8">
+<style>
+	body {
+		font-family: Tahoma;
+	}
+</style>
+<html lang="pt-br">
+	<h1>Contagem regressiva (10 até 0):</h1>
+	<p></p>
+
+	<script>
+		let pResultado = document.getElementsByTagName('p')[0]
+		for (let cont = 10; cont >= 1; cont--) {
+			pResultado.innerHTML += `${ cont } `
+		}
+	</script>
+</html>
