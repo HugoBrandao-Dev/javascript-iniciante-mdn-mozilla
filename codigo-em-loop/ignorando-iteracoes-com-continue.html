@@ -1,0 +1,54 @@
+<meta charset="UTF-8">
+<style>
+	body {
+		margin: 0;
+		padding: 0;
+	}
+	form {
+		display: flex;
+		align-items: center;
+	}
+	input, button {
+		border: solid 2px rgb(191,128,255);
+		padding: 5px 10px;
+		outline: none;
+	}
+	#btn-verificar {
+		background-color: rgb(191,128,255);
+		color: white;
+		border-left: none;
+		cursor: pointer;
+	}
+</style>
+<html>
+	<!-- Programa para verificar quais números de 0 até o valor que o
+	informar são quadrados de  inteiros-->
+	<form>
+		Até que número deseja verificar? <input type="number" name="input-valor" min="0" max="100" autofocus>
+		<button type="button" id="btn-verificar">Verificar</button>
+	</form>
+	<p></p>
+
+	<script>
+		let btnVerificar = document.querySelector("button#btn-verificar")
+		btnVerificar.addEventListener('click', verificarValor)
+
+		function verificarValor() {
+			let inputValor = document.getElementsByName('input-valor')[0]
+			let pResultado = document.getElementsByTagName('p')[0]
+
+			let valor = Number(inputValor.value)
+			
+			for (let contador = 1; contador <= valor; contador++) {
+				let raiz = Math.sqrt(contador)
+				let raizInteira = Math.floor(raiz)
+
+				if (raizInteira !== raiz) {
+					continue
+				}
+
+				pResultado.innerHTML += `${ contador } `
+			}
+		}
+	</script>
+</html>
