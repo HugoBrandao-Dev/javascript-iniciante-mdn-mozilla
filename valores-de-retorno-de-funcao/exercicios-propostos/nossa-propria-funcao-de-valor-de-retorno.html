@@ -1,0 +1,62 @@
+<meta charset="UTF-8">
+<style>
+	* {
+		outline: none;
+	}
+	input {
+		padding: 5px 10px;
+		font-size: 15pt;
+	}
+</style>
+<html lang="pt-br">
+<h1>Nossa propria função de valor de retorno</h1>
+<form>
+	Valor: <input type="number" name="input-valor">
+</form>
+<p></p>
+<p></p>
+<p></p>
+
+<script>
+	let inputValor = document.getElementsByName('input-valor')[0]
+
+	function gerarTagHTML(tipo, conteudo) {
+		let elemento = document.createElement(tipo)
+		elemento.innerHTML = conteudo
+		return elemento
+	}
+
+	function calcularFatorial(valor) {
+		let resultado = 1
+		for (let cont = 1; cont <= valor; cont++) {
+			resultado *= cont
+		}
+		return resultado
+	}
+
+	function valorValido(valor) {
+		if (isNaN(valor) || valor.length === 0) {
+			return false
+		}
+		return true
+	} 
+
+	inputValor.onchange = function() {
+		if (valorValido(inputValor.value)) {
+			let valor = Number(inputValor.value)
+			let pRaizQuadrada = document.getElementsByTagName('p')[0]
+			let pRaizCubica = document.getElementsByTagName('p')[1]
+			let pFatorial = document.getElementsByTagName('p')[2]
+			
+			pRaizQuadrada.innerHTML = `${ valor }<sup>2</sup> = ${ Math.pow(valor, 2) }`
+			pRaizCubica.innerHTML = `${ valor }<sup>3</sup> = ${ Math.pow(valor, 3) }`
+			pFatorial.innerHTML = `!${ valor } = ${ calcularFatorial(valor) }`
+		} else {
+			alert('Informe um valor numérico.')
+		}
+
+		inputValor.value = ''
+		inputValor.focus()
+	}
+</script>
+</html>
