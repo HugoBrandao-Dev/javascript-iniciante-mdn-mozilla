@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gerando cor aleatória</title>
+	<style>
+		button {
+			padding: 5px 10px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Gerando cor aleatória</h1>
+	<button type="button" id="btn-mudar-cor">Mudar cor</button>
+
+	<script>
+		let btnMudarCor = document.querySelector('button#btn-mudar-cor')
+
+		function gerarValorParaCor() {
+			return Math.floor(Math.random() * 256)
+		}
+
+		function gerarRGB() {
+			let red = gerarValorParaCor()
+			let green = gerarValorParaCor()
+			let blue = gerarValorParaCor()
+
+			return `rgb(${ red }, ${ green }, ${ blue })`
+		}
+
+		
+		/*
+		Para que o onfocus funcione, clique no botão, depois fora e, novamente, dentro do mesmo.
+		*/
+		btnMudarCor.onfocus = function() {
+			let bodyDocumento = document.getElementsByTagName('body')[0]
+
+			bodyDocumento.style.backgroundColor = gerarRGB()
+		}
+		/*
+		Para que o onblur funcione, clique no botão e depois fora dele.
+		*/
+		btnMudarCor.onblur = function() {
+			let bodyDocumento = document.getElementsByTagName('body')[0]
+
+			bodyDocumento.style.backgroundColor = gerarRGB()
+		}
+	</script>
+</body>
+</html>
