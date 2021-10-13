@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gerando cor aleatória</title>
+
+	<style>
+		button {
+			padding: 5px 10px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Gerando cor aleatória</h1>
+	<button type="button" id="btn-mudar-cor">Mudar cor</button>
+
+	<script>
+		let btnMudarCor = document.querySelector('button#btn-mudar-cor')
+
+		function gerarValorParaCor() {
+			return Math.floor(Math.random() * 256)
+		}
+
+		btnMudarCor.onclick = function() {
+			let bodyDocumento = document.getElementsByTagName('body')[0]
+
+			bodyDocumento.style.backgroundColor = `rgb(${ gerarValorParaCor() }, ${ gerarValorParaCor() }, ${ gerarValorParaCor() })`
+		}
+	</script>
+</body>
+</html>
