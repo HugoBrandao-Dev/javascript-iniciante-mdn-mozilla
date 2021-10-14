@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mudando fonte</title>
+	<style>
+		* {
+			font: 100% Tahoma, sans-serif;
+		}
+		h1 {
+			font-size: 2rem;
+			font-weight: bold;
+		}
+		button {
+			padding: 5px 10px;
+		}
+		small {
+			font-size: 0.7rem;
+		}
+	</style>
+</head>
+<body>
+	<h1>Mudando fonte</h1>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi reiciendis facere dolor velit ex qui, similique ullam voluptates assumenda totam. Ipsa eius excepturi eveniet deserunt aliquam ab facere maxime dignissimos!</p>
+	<small>Pressione qualquer tecla do seu teclado</small>
+
+	<script>
+		let pParagrafo = document.getElementsByTagName('p')[0]
+		let btnMudarTamanhoFonte = document.querySelector('button#btn-mudar-tamanho-fonte')
+		let pFonteAtual = document.querySelector('p#fonte-atual')
+		let pPesoAtual = document.querySelector('p#peso-atual')
+
+		window.onkeydown = function() {
+			pParagrafo.style.fontWeight = 'bold'
+		}
+		window.onkeyup = function() {
+			pParagrafo.style.fontWeight = 'normal'
+			pParagrafo.style.fontFamily = 'Tahoma'
+		}
+		window.onkeypress = function() {
+			pParagrafo.style.fontFamily = 'Arial'
+		}
+	</script>
+</body>
+</html>
