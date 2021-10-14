@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Objetos de evento</title>
+
+	<style>
+		* {
+			font-family: Arial;
+		}
+		button {
+			padding: 5px 10px;
+		}
+		small {
+			font-size: 7pt;
+		}
+	</style>
+</head>
+<body>
+	<h1>Objetos de evento</h1>
+	<button type="button" id="btn-mudar-cor">Mudar cor</button><br>
+	<small>Abrir o console de desenvolvedor.</small>
+
+	<script>
+		let  btnMudarCorFundo = document.querySelector('button#btn-mudar-cor')
+
+		function gerarValorParaCor() {
+			return Math.floor(Math.random() * 256)
+		}
+
+		function gerarRGB() {
+			let red = gerarValorParaCor()
+			let green = gerarValorParaCor()
+			let blue = gerarValorParaCor()
+			return `rgb(${ red }, ${ green }, ${ blue })`
+		}
+
+		// Utilizando o event object ()
+		function mudarCorBackground(event) {
+			event.target.style.backgroundColor = gerarRGB()
+			event.target.style.color = gerarRGB()
+
+			// Remove o evento logo em seguida
+			btnMudarCorFundo.removeEventListener('click', mudarCorBackground)
+		}
+
+		btnMudarCorFundo.addEventListener('click', mudarCorBackground)
+	</script>
+</body>
+</html>
