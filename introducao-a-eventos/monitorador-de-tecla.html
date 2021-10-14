@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Monitorador de tacla</title>
+
+	<style>
+	* {
+		font-family: Arial;
+	}
+	.comandos {
+		display: flex;
+		flex-direction: column;
+		font-size: 8pt;
+	}
+</style>
+</head>
+<body>
+	<h1>Monitorador de tacla</h1>
+	<p>Lorem ipsum, dolor sit amet consectetur, adipisicing elit. Consectetur expedita dolores nam autem eius laborum odio cumque corrupti laudantium reprehenderit voluptas, deserunt porro error blanditiis distinctio saepe. Eum, suscipit ducimus!</p>
+	<div class="comandos">
+		<small>Comandos:</small>
+		<small>u - Transforma todo o texto em maiúsculo.</small>
+		<small>l - Transforma todo o texto em minúsculo.</small>
+		<small>s - Muda o peso da fonte para forte.</small>
+		<small>n - Muda o peso da fonte para normal.</small>
+	</div>
+
+	<script>
+		window.onkeypress = function(event) {
+			let pParagrafo = document.getElementsByTagName('p')[0]
+
+			let teclaPressionada = event.key
+
+			switch (teclaPressionada) {
+				case 'u':
+				pParagrafo.style.textTransform = 'uppercase'
+				break
+				case 'l':
+				pParagrafo.style.textTransform = 'lowercase'
+				break
+				case 's':
+				pParagrafo.style.fontWeight = 'bold'
+				break
+				case 'n':
+				pParagrafo.style.fontWeight = 'normal'
+				break
+				default:
+				console.info(`Não há função para a tecla ${ teclaPressionada }.`)
+			}
+		}
+	</script>
+</body>
+</html>
