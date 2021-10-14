@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Prevenindo comportamento</title>
+
+	<style>
+		* {
+			box-sizing: border-box;
+			font-family: Arial;
+		}
+		form {
+			display: flex;
+			flex-direction: column;
+			width: 250px;
+		}
+		form input {
+			padding: 5px 10px;
+		}
+		form .ipt-texto {
+			width: 100%;
+			outline: none;
+			font-size: 12pt;
+			border: none;
+			border-bottom: 2px solid blueviolet;
+
+			transition-delay: 0.1s;
+			transition-duration: 0.2s;
+			transition-property: border-width;
+			transition-timing-function: all;
+		}
+		form input:focus {
+			border-width: 4px;
+		}
+		form label {
+			margin-bottom: 20px;
+		}
+		#ipt-enviar {
+			align-self: flex-end;
+			background-color: blueviolet;
+			color: white;
+			border: 2px solid blueviolet;
+			cursor: pointer;
+		}
+		#ipt-enviar:hover {
+			text-shadow: 0 0 2px white;
+		}
+	</style>
+</head>
+<body>
+	<h1>Prevenindo comportamento</h1>
+	<form>
+		<label>Primeiro nome: <input type="text" name="ipt-nome" class="ipt-texto"></label>
+		<label>Último nome: <input type="text" name="ipt-sobrenome" class="ipt-texto"></label>
+		<input type="submit" value="Enviar" id="ipt-enviar">
+	</form>
+
+	<script>
+		let formCadastro = document.getElementsByTagName('form')[0]
+
+		function isInputsValidos() {
+			let iptPrimeiroNome = document.getElementsByName('ipt-nome')[0]
+			let iptSobrenome = document.getElementsByName('ipt-sobrenome')[0]
+
+			let nome = iptPrimeiroNome.value
+			let sobrenome = iptSobrenome.value
+
+			if (nome.length === 0 && sobrenome.length === 0) {
+				return false
+			}
+			return true
+		}
+
+		formCadastro.onsubmit = function(event) {
+			if (!isInputsValidos()) {
+				event.preventDefault()
+				alert('Informe valores válidos.')
+			} else {
+				alert('Formulário enviado com sucesso.')
+			}
+		}
+	</script>
+</body>
+</html>
