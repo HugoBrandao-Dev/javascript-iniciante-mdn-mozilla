@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mudando a cor dos retângulos</title>
+
+	<style>
+		.retangulos {
+			display: flex;
+			flex-wrap: wrap;
+			width: 500px;
+		}
+		.retangulo {
+			background-color: red;
+			height: 50px;
+			width: 100px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Mudando a cor dos retângulos</h1>
+	<div class="retangulos">
+
+	</div>
+
+	<script>
+		let divRetangulos = document.getElementsByClassName('retangulos')[0]
+
+		function gerarDivHTML() {
+			let elemento = document.createElement('div')
+			elemento.setAttribute('class', 'retangulo')
+			return elemento
+		}
+
+		for (let quant = 1; quant <= 20; quant++) {
+			divRetangulos.appendChild(gerarDivHTML())
+		}
+
+		let divRetangulo = document.querySelectorAll('div.retangulo')
+
+
+		function gerarValorParaCor() {
+			return Math.floor(Math.random() * 256)
+		}
+
+		function gerarRGB() {
+			let red = gerarValorParaCor()
+			let green = gerarValorParaCor()
+			let blue = gerarValorParaCor()
+			return `rgb(${ red }, ${ green }, ${ blue })`
+		}
+
+		for (let indice = 0; indice < divRetangulo.length; indice++) {
+			divRetangulo[indice].onclick = function(event) {
+				event.target.style.backgroundColor = gerarRGB()
+			}
+		}
+	</script>
+</body>
+</html>
