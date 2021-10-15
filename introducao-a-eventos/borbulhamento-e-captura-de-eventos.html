@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Borbulhamento e captura de eventos</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+		div {
+			padding: 20px;
+			background-color: grey;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+		}
+		.hidden {
+			visibility: hidden;
+		}
+		.showing {
+			visibility: visible;
+		}
+	</style>
+</head>
+<body>
+	<h1>Borbulhamento e captura de eventos</h1>
+	<button type="button" id="btn-mostrar-video">Mostrar vídeo</button>
+	<div class="videoBox hidden">
+		<video controls height="200">
+			<source src="../videos/coding.mp4" type="video/mp4">
+		</video>
+	</div>
+
+	<script>
+		let btnMostrarVideo = document.querySelector('button#btn-mostrar-video')
+		let divVideoBox = document.getElementsByTagName('div')[0]
+		let videoCoding = document.getElementsByTagName('video')[0]
+
+		btnMostrarVideo.onclick = function(event) {
+			divVideoBox.setAttribute('class', 'videoBox showing')
+		}
+
+		divVideoBox.onclick = function(event) {
+			divVideoBox.setAttribute('class', 'videoBox hidden')
+		}
+
+		videoCoding.onclick = function(event) {
+			event.stopPropagation()
+		}
+	</script>
+</body>
+</html>
