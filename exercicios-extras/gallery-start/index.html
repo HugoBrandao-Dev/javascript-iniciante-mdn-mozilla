@@ -11,11 +11,14 @@
 
   <body>
     <h1>Image gallery example</h1>
-
+    <form id="form-nova-imagem">
+      <input type="file" name="ipt-nova-imagem">
+      <button type="button" id="btn-adicionar-imagem">Adicionar</button>
+    </form>
     <div class="full-img">
-      <img class="displayed-img" src="images/pic1.jpg">
+      <img class="displayed-img">
       <div class="overlay"></div>
-      <button class="dark">Darken</button>
+      <button type="button" id="btn-escurecer" class="dark" >Darken</button>
     </div>
 
     <div class="thumb-bar">

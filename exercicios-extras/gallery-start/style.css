@@ -8,6 +8,11 @@ body {
   margin: 0 auto;
 }
 
+#form-nova-imagem {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 .full-img {
   position: relative;
   display: block;
@@ -24,11 +29,12 @@ body {
   background-color: rgba(0,0,0,0);
 }
 
-button {
+#btn-escurecer {
   border: 0;
-  background: rgba(150,150,150,0.6);
+  background: rgba(150,150,150,0.8);
   text-shadow: 1px 1px 1px white;
   border: 1px solid #999;
+  text-transform: capitalize;
   position: absolute;
   cursor: pointer;
   top: 2px;
