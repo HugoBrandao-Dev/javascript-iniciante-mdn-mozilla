@@ -1,0 +1,105 @@
+<meta charset="UTF-8">
+<style>
+form {
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+}
+input, button {
+	outline: none;
+	padding: 5px 10px;
+}
+form input {
+	margin: 10px 0;
+	font-size: 12pt;
+	border: none;
+	border-bottom: 2px solid skyblue;
+}
+form button {
+	background-color: skyblue;
+	border: 2px solid skyblue;
+	cursor: pointer;
+	align-self: flex-end;
+}
+</style>
+<html lang="pt-br">
+<h1>Meu primeiro objeto</h1>
+<form>
+	Nome para do novo membro: <input type="text" placeholder="Nome do membro." name="ipt-nome-membro" autofocus>
+	Valor do novo membro: <input type="text" placeholder="Valor do membro" name="ipt-valor-membro">
+	<button type="button" id="btn-adicionar-membro">Adicionar</button>
+</form>
+
+<script>
+		// Objeto literal
+		var pessoa  = {
+			// Membros do objeto, contendo nomes e um valors.
+			// nome: ['Bob', 'Smith'],
+			nome: {
+				primeiro: 'Tobias',
+				ultimo: 'Oliveira'
+			},
+			idade: 32,
+			sexo: 'masculino',
+			interesses: ['música', 'esquiar'],
+			// Utilizando notação de ponto
+			bio: function() {
+				alert(this.nome.primeiro + ' ' + this.nome.ultimo + ' tem ' + this.idade + ' anos de idade. Ele gosta de ' + this.interesses[0] + ' e ' + this.interesses[1] + '.')
+			},
+			/*
+			Utilizando notação de colchetes, desta forma o objeto também pode ser chamado de ARRAY ASSOCIATIVO.
+			*/
+			saudacao: function() {
+				alert('Oi! Eu sou ' + this['nome']['primeiro'] + '.')
+			}
+		}
+
+		/*
+		Na CHAMADA:
+		'pessoa' é um namespace
+		'nome' é um sub-namespace
+		*/
+		// console.log(pessoa.nome.primeiro)
+
+		// Setando novos valores para os nomes (alterando-os)
+		pessoa.nome.primeiro = 'Dinorá'
+		pessoa.idade = 48
+
+		// Crindo novos valores
+		pessoa['olhos'] = 'castanho'
+		pessoa.despedida = function() {
+			alert('Adeus a todos!!')
+		}
+
+		const btnAdicionarMembro = document.querySelector('#btn-adicionar-membro')
+		btnAdicionarMembro.addEventListener('click', adicionarNovoMembro)
+
+		function isInputValido() {
+			const iptsMembro = document.querySelectorAll('input')
+			for (let indice = 0; indice < iptsMembro.length; indice++) {
+				if (iptsMembro[indice].value.length === 0) {
+					return false
+				}
+			}
+			return true
+		}
+
+		// Função que adiciona um novo membro para o objeto
+		function adicionarNovoMembro() {
+			const iptNomeMembro = document.getElementsByName('ipt-nome-membro')[0]
+			const iptValorMembro = document.getElementsByName('ipt-valor-membro')[0]
+
+			const nome = iptNomeMembro.value
+			const valor = iptValorMembro.value
+
+			if(isInputValido()) {
+				pessoa[nome] = valor
+				alert('Membro cadastrado com sucesso.')
+				iptNomeMembro.value = ''
+				iptValorMembro.value = ''
+			} else {
+				alert('Preencha todos os campos para o cadastro.')
+			}
+		}
+	</script>
+	</html>
