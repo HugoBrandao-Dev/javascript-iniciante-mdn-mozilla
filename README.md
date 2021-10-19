@@ -12,3 +12,7 @@ Os estudos presentes foram feitos com base no curso de JavaScript
 "completos iniciantes" da MDN Mozilla. Eu fiz (estudei) este curso com o 
 intuito de complementar o prévio conhecimento de JavaScript que adquiri 
 em outros cursos.
+
+Os exercícios propostos de "O básico sobre objetos" não está contidos
+diretamente na página referente ao capítulo, mas sim em um link externo,
+presente nessa mesma página.

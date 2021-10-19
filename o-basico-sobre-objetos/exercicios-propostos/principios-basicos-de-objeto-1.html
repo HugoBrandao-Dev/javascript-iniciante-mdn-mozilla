@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Princípios básicos de objeto</title>
+</head>
+<body>
+	<h1>Princípios básicos de objeto</h1>
+	<section>
+		
+	</section>
+
+	<script>
+		let section = document.getElementsByTagName('section')[0]
+		let cat = {
+			name : 'Bertie',
+			breed : 'Cymric',
+			color : 'white',
+			greeting: function() {
+				console.log('Meow!');
+			}
+		}
+
+		// Put your code here
+		/*
+		Armazene o valor da propriedade "name" dentro da variável "catName", usando a notação de colchetes
+		*/
+		let catName = cat['name']
+		/*
+		Rode o método "greeting()" usando a notação (no console de desenvolvedor)
+		*/
+		console.log(cat.greeting())
+		/*
+		Altere o valor da propriedade "color" para "black"
+		*/
+		cat.color = 'black'
+
+		// Don't edit the code below here
+
+		let para1 = document.createElement('p');
+		let para2 = document.createElement('p');
+
+		para1.textContent = `The cat's name is ${ catName }.`;
+		para2.textContent = `The cat's color is ${ cat.color }.`;
+
+		section.appendChild(para1);
+		section.appendChild(para2);
+</script>
+</body>
+</html>
