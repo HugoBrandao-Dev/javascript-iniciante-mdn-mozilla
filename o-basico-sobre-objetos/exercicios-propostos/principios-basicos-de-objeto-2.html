@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Princípios básicos de objeto</title>
+
+	<style>
+		p, li, h3 {
+			text-transform: capitalize;
+		}
+	</style>
+</head>
+<body>
+	<hgroup>
+		<h1>Princípios básicos de objeto</h1>
+		<h2>Exercício 02</h2>
+		<h3>Banda:</h3>
+	</hgroup>
+	<h4>Nacionalidade</h4>
+	<p></p>
+	<h4>Formação</h4>
+	<p></p>
+	<h4>Gêneros</h4>
+	<ul></ul>
+	<h4>Membros</h4>
+	<ul></ul>
+	<h4>Álbuns</h4>
+	<ol></ol>
+
+	<script>
+		// As informações sobre a banda foram tiradas do Wikipedia
+		let bandaFavorita = {
+			name: 'queen',
+			natinality: 'united kingdom',
+			genre: [
+					'rock', 
+					'hard rock', 
+					'pop rock', 
+					'progressive rock'
+					],
+			members: [
+					{
+						name: 'freddie mercury',
+						alive: false
+					},
+					{
+						name: 'brian may',
+						alive: true
+					},
+					{
+						name: 'roger taylor',
+						alive: true
+					},
+					{
+						name: 'john deacon',
+						alive: true
+					},
+					],
+			formed: 1970,
+			split: true,
+			albums: [
+					{
+						name: 'queen',
+						released: 1973
+					},
+					{
+						name: 'queen ii',
+						released: 1974
+					},
+					{
+						name: 'sheer heart attack',
+						released: 1974
+					},
+					{
+						name: 'a night at the opera',
+						released: 1975
+					},
+					{
+						name: 'a day at the races',
+						released: 1976
+					},
+					{
+						name: 'news of the world',
+						released: 1977
+					},
+					{
+						name: 'jazz',
+						released: 1978
+					},
+					{
+						name: 'the game',
+						released: 1980
+					},
+					{
+						name: 'flash gordon',
+						released: 1980
+					},
+					{
+						name: 'hot space',
+						released: 1982
+					},
+					{
+						name: 'the works',
+						released: 1984
+					},
+					{
+						name: 'a kind of magic',
+						released: 1986
+					},
+					{
+						name: 'the miracle',
+						released: 1989
+					},
+					{
+						name: 'innuendo',
+						released: 1991
+					},
+					{
+						name: 'made in heaven',
+						released: 1995
+					}
+			],
+		}
+
+		let h3NomeBanda = document.getElementsByTagName('h3')[0]
+		let pNacionalidade = document.getElementsByTagName('p')[0]
+		let pFormacao = document.getElementsByTagName('p')[1]
+
+		h3NomeBanda.innerText += ` ${bandaFavorita.name}`
+		pNacionalidade.innerText = bandaFavorita.natinality
+		pFormacao.innerText = bandaFavorita.formed
+
+		function getElementoHTML(tipo, conteudo) {
+			let elemento = document.createElement('li')
+			elemento.innerHTML = conteudo
+			return elemento
+		}
+
+		function setGenerosBanda() {
+			let ulGeneros = document.getElementsByTagName('ul')[0]
+			let genre = bandaFavorita.genre
+			for (let cont = 0; cont < genre.length; cont++) {
+				ulGeneros.appendChild(getElementoHTML('li', genre[cont]))
+			}
+		}
+
+		function setMembrosBanda() {
+			let ulMembros = document.getElementsByTagName('ul')[1]
+			let members = bandaFavorita.members
+			for (let cont = 0; cont < members.length; cont++) {
+				let member = members[cont]
+				let elemento = null
+				if (member.alive) {
+					elemento = getElementoHTML('li', member.name)
+				} else {
+					elemento = getElementoHTML('li', `${ member.name} &#9840;`)
+				}
+				ulMembros.appendChild(elemento)
+			}
+		}
+
+		function setAlbunsBanda() {
+			let ulAlbuns = document.getElementsByTagName('ol')[0]
+			let albums = bandaFavorita.albums
+			for (let cont = 0; cont < albums.length; cont++) {
+				elemento = getElementoHTML('li', `${ albums[cont].name } (${ albums[cont].released })`)
+				ulAlbuns.appendChild(elemento)
+			}
+		}
+
+		setGenerosBanda()
+		setMembrosBanda()
+		setAlbunsBanda()
+	</script>
+</body>
+</html>
