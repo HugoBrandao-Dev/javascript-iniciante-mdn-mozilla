@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Princípios básicos de objeto</title>
+</head>
+<body>
+	<hgroup>
+		<h1>Princípios básicos de objeto</h1>
+		<h2>Exercício 03</h2>
+		<h3>Gato</h3>
+	</hgroup>
+	<p></p>
+	<p></p>
+	<h3>Meu gato</h3>
+	<p></p>
+	<p></p>
+
+	<script>
+		let pNome = document.getElementsByTagName('p')[0]
+		let pRaca = document.getElementsByTagName('p')[1]
+
+		let cat = {
+			name: 'Bertie',
+			breed: 'Cymric',
+			color: 'white',
+			// Greeting foi reescrito para chamar o nome e a raça
+			greeting: function() {
+				console.log(`Hello!! said ${ this.name } the ${ this.breed }.`)
+			}
+		}
+
+		pNome.innerHTML = `The cat's name is ${ cat.name }.`
+		pRaca.innerHTML = `The cat's color is ${ cat.color }`
+
+		// Meu próprio objeto gato
+		let pNomeMeuGato = document.getElementsByTagName('p')[2]
+		let pRacaMeuGato = document.getElementsByTagName('p')[3]
+
+		let meuCat = {
+			name: 'Tobias',
+			breed: 'Maine Coon',
+			color: 'orange',
+			greeting: function() {
+				console.log(`Olá!! disse ${ this.name } o ${ this.breed }.`)
+			}
+		}
+
+		pNomeMeuGato.innerHTML = `O nome do meu gato é ${ meuCat.name }.`
+		pRacaMeuGato.innerHTML = `A cor do meu gato é ${ meuCat.color }.`
+	</script>
+</body>
+</html>
