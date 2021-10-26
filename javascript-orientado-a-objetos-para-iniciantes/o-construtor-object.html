@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>O construtor Object</title>
+</head>
+<body>
+	<h1>O construtor Object</h1>
+
+	<script>
+		/*
+		Object() é um objeto genérico que contém um construtor.
+		*/
+		var pessoa1 = new Object()
+		pessoa1.nome = 'Tobias'
+		pessoa1['idade'] = 32
+		pessoa1.apresentar = function() {
+			alert(`Olá! Eu sou ${ this.nome }.`)
+		}
+
+		// Objeto literal
+		var pessoa2 = new Object({
+			nome: 'Diralice',
+			idade: 93,
+			apresentar: function() {
+				alert(`Olá! Eu sou ${ this.nome }.`)
+			}
+		})
+		console.info(pessoa1['nome'], pessoa2['nome'])
+		console.info(pessoa1['idade'], pessoa2['idade'])
+		pessoa1.apresentar()
+	</script>
+</body>
+</html>
