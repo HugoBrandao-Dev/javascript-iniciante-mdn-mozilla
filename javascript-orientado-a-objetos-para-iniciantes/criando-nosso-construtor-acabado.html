@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Criando nosso construtor acabado</title>
+</head>
+<body>
+	<h1>Criando nosso construtor acabado</h1>
+
+	<script>
+		function Pessoa(primeiroNome, ultimoNome, idade, genero, interesses) {
+			this.nome = {
+				'primeiro': primeiroNome,
+				'ultimo': ultimoNome
+			}
+			this.idade = idade
+			this.genero = genero
+			this.interesses = interesses
+			this.sobre = function() {
+				alert(`${ this.nome.primeiro } ${this.nome.ultimo} tem ${ this.idade } anos de idade. Ele gosta de ${ this.interesses[0] } e ${ this.interesses[1] }.`)
+			}
+			this.apresentar = function() {
+				alert(`Olá! Eu sou ${ this.nome.primeiro }.`)
+			}
+		}
+
+		var pessoa1 = new Pessoa('Tobias', 'Oliveira', 29, 'masculino', ['música', 'esquiar'])
+	</script>
+</body>
+</html>
