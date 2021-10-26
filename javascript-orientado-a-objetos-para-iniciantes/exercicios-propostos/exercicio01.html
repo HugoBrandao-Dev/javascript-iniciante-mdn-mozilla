@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Exercício 01</title>
+</head>
+<body>
+	<h1>Exercício 01</h1>
+	<!-- Baseado na aula anterior (Criando nosso construtor acabado) 
+	adicionar:
+	- Fazer o pronome pessoal variar de acordo com o genero que a pessoa 
+	informar;
+	- Ter uma forma de mostrar todos os interesses (quando mais de um);
+	 -->
+
+	<script>
+		function getInteressesFormatados(_interesses) {
+			let interesses = ''
+			let penultimo = _interesses.length - 2
+			for (let indice in _interesses) {
+				let interesse = _interesses[indice]
+				interesses += interesse
+				if (indice < penultimo) {
+					interesses += ', '
+				} else if (indice == penultimo) {
+					interesses += ' e '
+				}
+			}
+			return interesses
+		}
+
+		function getPronomePessoal(_genero) {
+			let pronome = null
+			if (_genero === 'm' || _genero === 'masculino') {
+				pronome = 'Ele'
+			} else if (_genero === 'f' || _genero === 'feminino') {
+				pronome = 'Ela'
+			} else {
+				console.warn('Genero não definido.')
+				pronome = 'N/A'
+			}
+			return pronome
+		}
+
+		function Pessoa(primeiroNome, ultimoNome, idade, genero, interesses) {
+			this.nome = {
+				'primeiro': primeiroNome,
+				'ultimo': ultimoNome
+			}
+			this.idade = idade
+			this.genero = genero
+			this.interesses = interesses
+			this.sobre = `${ this.nome.primeiro } ${ this.nome.ultimo } tem ${ this.idade } anos de idade. ${ getPronomePessoal(this.genero) } gosta de ${ getInteressesFormatados(this.interesses) }.`
+		}
+
+		var pessoa1 = new Pessoa('Tobias', 'Oliveira', 21, 'masculino', ['futebol', 'eSports', 'tênis de mesa'])
+		var pessoa2 = new Pessoa('Jeremias', 'Oliveira', 56, 'm', ['corrida de moto', 'ciclismo', 'vôlei', 'programação'])
+		var pessoa3 = new Pessoa('Doralice', 'Cruz', 34, 'f', ['patinação'])
+		var pessoa4 = new Pessoa('Dinorá', 'Oliveira', 28, 'feminino', ['designe de moda', 'basquete'])
+	</script>
+</body>
+</html>
