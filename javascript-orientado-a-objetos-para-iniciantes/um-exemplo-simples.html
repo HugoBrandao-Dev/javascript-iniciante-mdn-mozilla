@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Um exemplo simples</title>
+</head>
+<body>
+	<h1>Um exemplo simples</h1>
+
+	<script>
+		// function criarNovaPessoa(nome) {
+		// 	var objeto = {}
+		// 	objeto.nome = nome
+		// 	objeto.apresentar = function() {
+		// 		alert(`Olá! Eu sou ${ objeto.nome }.`)
+		// 	}
+		// 	return objeto
+		// }
+		function Pessoa(nome) {
+			this.nome = nome
+			this.apresentar = function() {
+				alert(`Olá! Eu sou ${ this.nome }.`)
+			}
+		}
+
+		var pessoa1 = new Pessoa('Tobias')
+		var pessoa2 = new Pessoa('Dinorá')
+	</script>
+</body>
+</html>
