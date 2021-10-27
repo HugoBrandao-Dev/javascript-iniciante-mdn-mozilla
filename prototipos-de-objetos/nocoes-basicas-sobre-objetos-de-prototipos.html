@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Noções básicas sobre objetos de prototipos</title>
+</head>
+<body>
+	<h1>Noções básicas sobre objetos de prototipos</h1>
+
+	<script>
+		function getFormatarInteresses(_interesses) {
+			let interesses = ''
+			let interesse = ''
+			let penultimoInteresse = _interesses.length - 2
+			for (let indice in _interesses) {
+				interesse = _interesses[indice]
+				interesses += interesse
+				if (indice < penultimoInteresse) {
+					interesses += ', '
+				} else if (indice == penultimoInteresse) {
+					interesses += ' e '
+				}
+			}
+			return interesses
+		}
+		function getPronomePessoal(_genero) {
+			let generoFormatado = _genero.toLowerCase()
+			if (generoFormatado === 'f' || generoFormatado === 'feminino') {
+				return 'Ela'
+			} else if (generoFormatado === 'm' || generoFormatado === 'masculino') {
+				return 'Ele'
+			} else {
+				console.warn('Gênero não especificado.')
+				return 'N/A'
+			}
+		}
+		function Pessoa(_primeiroNome, _ultimoNome, _idade, _genero, _interesses) {
+			// Propriedades
+			this.nome = {
+				'primeiro': _primeiroNome,
+				'ultimo': _ultimoNome
+			}
+			this.idade = _idade
+			this.genero = _genero
+			this.interesses = _interesses
+
+			// Métodos
+			this.sobre = function() {
+				let descricao = `${ this.nome.primeiro } ${ this.nome.ultimo } tem ${ this.idade } anos e idade. ${ getPronomePessoal(this.genero) } gosta de ${ getFormatarInteresses(this.interesses) }.`
+				alert(descricao)
+			}
+		}
+
+		var pessoa1 = new Pessoa('Tobias', 'Oliveira', 39, 'm', ['tênis de mesa', 'programação', 'box'])
+		
+		// Para ver o objeto de protótipo do construtor do objeto
+		console.log(pessoa1.__proto__.__proto__)
+		console.log(Object.getPrototypeOf(pessoa1))
+	</script>
+</body>
+</html>
