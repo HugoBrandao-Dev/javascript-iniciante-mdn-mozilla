@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Modificando Protótipos</title>
+</head>
+<body>
+	<h1>Modificando Protótipos</h1>
+
+	<script>
+		function getPronomePessoal(_genero) {
+			let genero = _genero.toLowerCase()
+			if (genero === 'f' || genero === 'feminino') {
+				return 'Ela'
+			} else if (genero === 'm' || genero === 'masculino') {
+				return 'Ele'
+			} else {
+				console.warn('Nenhum gênero informado.')
+				return 'N/A'
+			}
+		}
+		function getInteressesFormatado(_interesses) {
+			let interesses = ''
+			let interesse = ''
+			let penultimoInteresse = _interesses.length - 2
+			for (let indice in _interesses) {
+				interesse = _interesses[indice]
+				interesses += interesse
+				if (indice < penultimoInteresse) {
+					interesses += ', '
+				} else if (indice == penultimoInteresse) {
+					interesses += ' e '
+				}
+			}
+			return interesses
+		}
+		function Pessoa(_primeiroNome, _ultimoNome, _idade, _genero, _interesses) {
+			this.nome = {
+				'primeiro': _primeiroNome,
+				'ultimo': _ultimoNome
+			}
+			this.idade = _idade
+			this.genero = _genero
+			this.interesses = _interesses
+			this.sobre = function() {
+				let descricao = `${ this.nome.primeiro } ${ this.nome.ultimo } tem ${ this.idade } anos de idade. ${ getPronomePessoal(this.genero) } gosta de ${ getInteressesFormatado(this.interesses) }.`
+				alert(descricao)
+			}
+		}
+		let pessoa1 = new Pessoa('Doralice', 'Cruz', 39, 'feminino', ['natação', 'vôlei'])
+		/*
+		O propriedade prototype de um construtor é um objeto que funciona 
+		como um lugar de armazenamento (bucket) de propriedades e métodos 
+		herdáveis para outros objetos abaixo da cadeia de protótipos.
+		*/
+		Pessoa.prototype.despedida = function() {
+			alert(`${ this.nome.primeiro } saiu do prédio. Adeus por agora!!`)
+		}
+	</script>
+</body>
+</html>
