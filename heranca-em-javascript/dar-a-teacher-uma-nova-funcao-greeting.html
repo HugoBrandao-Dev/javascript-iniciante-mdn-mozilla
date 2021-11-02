@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dar a Teacher uma nova função greeting</title>
+</head>
+<body>
+	<h1>Dar a Teacher uma nova função greeting</h1>
+
+	<script>
+		/* ########## Métodos Getters e Setters */
+
+		function getPronomePessoal(_genero) {
+			let genero = _genero.toLowerCase()
+			if (genero === 'f' || genero === 'feminino') {
+				return 'Ela'
+			} else if (genero === 'm' || genero === 'masculino') {
+				return 'Ele'
+			} else {
+				console.warn('Gênero não informado.')
+				return 'N/A'
+			}
+		}
+
+		function getInteressesFormatado(_interesses) {
+			let interesses = ''
+			let interesse = ''
+			let penultimoIndice = _interesses.length - 2
+			for (let indice in _interesses) {
+				interesse = _interesses[indice]
+				interesses += interesse
+				if (indice == penultimoIndice) {
+					interesses += ' e '
+				} else if (indice < penultimoIndice) {
+					interesses += ', '
+				}
+			}
+			return interesses
+		}
+
+		function getPronomeTratamento(_genero) {
+			let genero = _genero.toLowerCase()
+			let prefixo = ''
+			if (genero === 'f' || genero === 'feminino') {
+				prefixo = 'Sra'
+			} else if (genero === 'm' || genero === 'masculino') {
+				prefixo = 'Sr'
+			} else {
+				prefixo = 'Sx'
+			}
+			return prefixo
+		}
+
+		/* ########## Pessoa ########## */
+
+		// Construtor + Propriedades
+		function Pessoa(_primeiroNome, _ultimoNome, _idade, _genero = 'n/a', _interesses) {
+			this.nome = {
+				'primeiro': _primeiroNome,
+				'ultimo': _ultimoNome
+			}
+			this.idade = _idade
+			this.genero = _genero
+			this.interesses = _interesses
+		}
+
+		// Métodos
+		Pessoa.prototype.sobre = function() {
+			let descricao = `${ this.nome.primeiro } ${ this.nome.ultimo} tem ${ this.idade } anos de idade. ${ getPronomePessoal(this.genero) } gosta de ${ getInteressesFormatado(this.interesses) }.`
+			alert(descricao)
+		}
+		Pessoa.prototype.apresentar = function() {
+			let apresentacao = `Olá!! Eu sou ${ this.nome.primeiro}.`
+			alert(apresentacao)
+		}
+		Pessoa.prototype.despedir = function() {
+			let despedida = `${ this.nome.primeiro } deixa o prédio. Adeus.`
+			alert(despedida)
+		}
+
+		/* ########## Professor ########## */
+		
+		// Construtor + Propriedade
+		function Professor(_primeiroNome, _ultimoNome, _idade, _genero, _interesses, _area) {
+			Pessoa.call(this, _primeiroNome, _ultimoNome, _idade, _genero, _interesses)
+			this.area = _area
+		}		
+
+		// Herdando de Pessoa
+		Professor.prototype = Object.create(Pessoa.prototype)
+		Object.defineProperty(Professor.prototype, 'constructor', {
+			value: Professor,
+			enumerable: false,
+			writable: true
+		})
+
+		// Métodos
+		Professor.prototype.apresentar = function() {
+			let apresentacao = `Olá. Meu nome é ${ getPronomeTratamento(this.genero) }. ${ this.nome.ultimo } e eu leciono ${ this.area }.`
+			alert(apresentacao)
+		}
+		
+		/* ########## Execução ########## */
+		
+		let pessoa1 = new Pessoa('Tobias', 'Oliveira', 49, 'm', ['programação', 'tênis de mesa', 'futebol'])
+		let pessoa2 = new Pessoa('Dinorá', 'Oliveira', 39, '', ['vôlei', 'ciclismo'])
+
+		let professor1 = new Professor('Jeremias', 'Cruz', 29, 'm', ['lecionar', 'vôlei', 'ciclismo'], 'Química')
+		let professora1 = new Professor('Doralice', 'Cruz', 40, 'f', ['lecionar', 'programação', 'futebol'], 'Física')
+	</script>
+</body>
+</html>
