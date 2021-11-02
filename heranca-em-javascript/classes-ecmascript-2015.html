@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Classes ECMAScript 2015</title>
+</head>
+
+<body>
+	<h1>Classes ECMAScript 2015</h1>
+	<script>
+		class Pessoa {
+
+			// Construtor + Propriedades
+			constructor(_primeiroNome, _ultimoNome, _idade, _genero, _interesses) {
+				this.nome = {
+					'primeiro': _primeiroNome,
+					'ultimo': _ultimoNome
+				}
+				this.idade = _idade
+				this.genero = _genero
+				this.interesses = _interesses
+			}
+
+			// Métodos
+			apresentar() {
+				let apresentacao = `Oi!! Eu sou ${this.nome.primeiro}.`
+				alert(apresentacao)
+			}
+			despedir() {
+				let despedida = `${this.nome.primeiro} deixa a residência. Adeus.`
+				alert(despedida)
+			}
+		}
+
+		let pessoa1 = new Pessoa('Tobias', 'Oliveira', 41, 'm', ['vôlei', 'futebol', 'ciclismo'])
+
+		let pessoa2 = new Pessoa('Doralice', 'Cruz', 85, 'f', ['assistir novela', 'crochê'])
+	</script>
+</html>
