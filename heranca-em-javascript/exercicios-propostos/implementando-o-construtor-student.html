@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Implementando o construtor Student</title>
+</head>
+<body>
+	<h1>Implementando o construtor Student</h1>
+
+	<script>
+		/* ########## Métodos Getters e Setters ########## */
+
+		function getPronomePessoal(_genero) {
+			let genero = _genero.toLowerCase()
+			if (genero === 'f' || genero === 'feminino') {
+				return 'Ela'
+			} else if (genero === 'm' || genero === 'masculino') {
+				return 'Ele'
+			} else {
+				console.warn('Gênero não informado.')
+				return 'N/A'
+			}
+		}
+		function getInteressesFormatado(_interesses) {
+			let interesses = ''
+			let interesse = ''
+			let penultimoIndice = _interesses.length - 2
+			for (let indice in _interesses) {
+				interesse = _interesses[indice]
+				interesses += interesse
+				if (indice == penultimoIndice) {
+					interesses += ' e '
+				} else if (indice < penultimoIndice) {
+					interesses += ', '
+				}
+			}
+			return interesses
+		}
+		function getPronomeTratamento(_genero) {
+			this.genero = _genero.toLowerCase()
+			if (genero === 'f' || genero === 'feminino') {
+				return 'Sra'
+			} else if (genero === 'm' || genero === 'masculino') {
+				return 'Sr'
+			} else {
+				console.warn('Gênero não informado.')
+				return 'Sx'
+			}
+		}
+
+		/* ########## Pessoa ########## */
+
+		// Construtor + Propriedades
+		function Pessoa(_primeiroNome, _ultimoNome, _idade, _genero = 'N/A', _interesses) {
+			this.nome = {
+				'primeiro': _primeiroNome,
+				'ultimo': _ultimoNome
+			}
+			this.idade = _idade
+			this.genero = _genero
+			this.interesses = _interesses
+		}
+
+		// Métodos
+		Pessoa.prototype.sobre = function() {
+			let descricao = `${ this.nome.primeiro } ${ this.nome.ultimo } tem ${ this.idade } de idade. ${ getPronomePessoal(this.genero) } gosta de ${ getInteressesFormatado(this.interesses) }.`
+			alert(descricao)
+		}
+		Pessoa.prototype.apresentar = function() {
+			let apresentacao = `Olá!! Eu sou ${ this.nome.primeiro }`
+			alert(apresentacao)
+		}
+		Pessoa.prototype.despedir = function() {
+			let despedida = `${ this.nome.primeiro } deixa a residência. Adeus.`
+			alert(despedida)
+		}
+
+		/* ########## Professor ########## */
+
+		// Construtor + Propriedades
+		function Professor(_primeiroNome, _ultimoNome, _idade, _genero, _interesses, _area) {
+			Pessoa.call(this, _primeiroNome, _ultimoNome, _idade, _genero, _interesses)
+			this.area = _area
+		}
+
+		// Herdando de Pessoa
+		Professor.prototype = Object.create(Pessoa.prototype)
+		Object.defineProperty(Professor.prototype, 'constructor', {
+			value: Professor,
+			enumerable: false,
+			writable: true
+		})
+
+		// Métodos
+		Professor.prototype.apresentar = function() {
+			let apresentacao = `Olá!! Meu nome é ${ getPronomeTratamento(this.genero) }. ${ this.nome.ultimo } e leciono ${ this.area }.`
+			alert(apresentacao)
+		}
+
+		/* ########## Estudante ########## */
+
+		// Construtor + Propriedades
+		function Estudante(_primeiroNome, _ultimoNome, _idade, _genero, _interesses, _curso) {
+			Pessoa.call(this, _primeiroNome, _ultimoNome, _idade, _genero, _interesses)
+			this.curso = _curso
+		}
+
+		// Herdando de Pessoa
+		Estudante.prototype = Object.create(Pessoa.prototype)
+		Object.defineProperty(Estudante.prototype, 'constructor', {
+			value: Estudante,
+			enumerable: false,
+			writable: true
+		})
+
+		// Métodos
+		Estudante.prototype.apresentar = function() {
+			let apresentacao = `Eae, me chamo ${ this.nome.primeiro }. Eu estou cursando ${ this.curso }.`
+			alert(apresentacao)
+		}
+
+		/* ########## Execução ########## */
+
+		let pessoa1 = new Pessoa('Tobias', 'Oliveira', 38, 'm', ['programação', 'futebol', 'tênis de mesa'])
+
+		let professor1 = new Professor('Jeremias', 'Cruz', 30, 'm', ['química', 'futebol', 'basquete'], 'química')
+
+		let estudante1 = new Estudante('Dinorá', 'Oliveira', 29, 'f', ['programação', 'vôlei', 'tênis de quadra'], 'Arquitetura de Software')
+	</script>
+</body>
+</html>
