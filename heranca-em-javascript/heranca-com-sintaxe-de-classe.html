@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Herança com sintaxe de classe</title>
+</head>
+<body>
+	<h1>Herança com sintaxe de classe</h1>
+
+	<script>
+		/* ########## Pessoa ########## */
+		class Pessoa {
+			
+			// Construtor + Propriedade
+			constructor(_primeiroNome, _ultimoNome, _idade, _genero = 'N/A', _interesses) {
+				this.nome = {
+					'primeiro': _primeiroNome,
+					'ultimo': _ultimoNome
+				}
+				this.idade = _idade
+				this.genero = _genero
+				this.interesses = _interesses
+			}
+
+			// Métodos
+			apresentar() {
+				let apresentacao = `Oi!! Me chamo ${ this.nome.primeiro }.`
+				alert(apresentacao)
+			}
+			despedir() {
+				let despedida = `${ this.nome.primeiro } deixa a residência. Adeus.`
+				alert(despedida)
+			}
+		}
+
+		/* ########## Professor ########## */
+		class Professor extends Pessoa {
+			constructor(_primeiroNome, _ultimoNome, _idade, _genero, _interesses, _area, _grau) {
+
+				// Faz a chamada e passa os parâmetros para a classe mãe
+				super(_primeiroNome, _ultimoNome, _idade, _genero, _interesses)
+				this.area = _area
+				this.grau = _grau
+			}
+		}
+
+		let professor1 = new Professor('Doralice', 'Cruz', 51, 'feminino', ['tênis de mesa', 'programação', 'vôlei'], 'física', 'superior')
+	</script>
+</body>
+</html>
