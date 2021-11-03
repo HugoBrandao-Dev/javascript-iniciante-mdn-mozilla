@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Getters e Setters</title>
+</head>
+<body>
+	<h1>Getters e Setters</h1>
+
+	<script>
+		/* ########## Pessoas ########## */
+
+		class Pessoa {
+
+			// Constructor + Propriedade
+			constructor(primeiroNome, ultimoNome, idade, genero = 'N/A', interesses) {
+				this._nome = {
+					'primeiro': primeiroNome,
+					'ultimo': ultimoNome
+				}
+				this._idade = idade
+				this._genero = genero
+				this._interesses = interesses
+			}
+			// Métodos Getters e Setters
+			get nome() {
+				return this._nome
+			}
+			set nome(novoNome) {
+				this._nome = novoNome
+			}
+
+			get idade() {
+				return this._idade
+			}
+			set idade(novaIdade) {
+				this._idade = novaIdade
+			}
+
+			get genero() {
+				return this._genero
+			}
+			set genero(novoGenero) {
+				this._genero = novoGenero.toUpperCase()
+			}
+
+			get interesses() {
+				return this._interesses
+			}
+			set interesses(novosInteresses) {
+				this._interesses = novosInteresses
+			}
+
+			// Métodos especiais
+			apresentar() {
+				let apresentacao = `Oi! Meu nome é ${ this.nome.primeiro }.`
+				alert(apresentacao)
+			}
+			despedir() {
+				let despedida = `${ this.nome.primeiro } deixa residência. Adeus.`
+				alert(despedida)
+			}
+		}
+
+		/* ########## Professor ########## */
+
+		class Professor extends Pessoa {
+			
+			// Construtor + Propriedades
+			constructor(primeiroNome, ultimoNome, idade, genero, interesses, area, grau) {
+				super(primeiroNome, ultimoNome, idade, genero, interesses)
+				this._area = area
+				this._grau = grau
+			}
+
+			// Métodos Getters e Setters
+			get area() {
+				return this._area
+			}
+			set area(novaArea) {
+				this._area = novaArea
+			}
+
+			get grau() {
+				return this._grau
+			}
+			set grau(novoGrau) {
+				this._grau = novoGrau
+			}
+		}
+
+		/* ########## Execução ########## */
+
+		let pessoa1 = new Pessoa('Jeremias', 'Cruz', 41, 'm', ['tênis de mesa', 'programação'])
+
+		let professor1 = new Professor('Dinorá', 'Oliveira', 81, 'f', ['caminhada', 'ciclismo'], 'física', 'superior')
+	</script>
+</body>
+</html>
