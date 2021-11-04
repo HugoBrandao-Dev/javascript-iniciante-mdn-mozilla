@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Our superheroes</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+      <header>
+
+      </header>
+
+      <section>
+
+      </section>
+
+    <script>
+		const header = document.querySelector('header');
+		const section = document.querySelector('section');
+
+		let requisicaoURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json'
+
+		let requisicao = new XMLHttpRequest()
+		requisicao.open('GET', requisicaoURL)
+		requisicao.responseType = 'json'
+		requisicao.send()
+
+		requisicao.onload = function() {
+			let superHeroes = requisicao.response
+			preencherHeader(superHeroes)
+			mostrarHerois(superHeroes)
+		}
+
+		function getElementoHTML(tipo, conteudo) {
+			let elemento = document.createElement(tipo)
+			elemento.innerHTML = conteudo
+			return elemento
+		}
+
+		function setElementoHTML(elementoPai, elementosFilhos = []) {
+			let elementoFilho = ''
+			for (let indice in elementosFilhos) {
+				elementoFilho = elementosFilhos[indice]
+				elementoPai.appendChild(elementoFilho)
+			}
+		}
+
+		function preencherHeader(objetoJSON) {
+			let h1Nome = document.createElement('h1')
+			h1Nome.textContent = objetoJSON['squadName']
+			header.appendChild(h1Nome)
+
+			let pResidencia = document.createElement('p')
+			pResidencia.textContent = `Cidade: ${ objetoJSON['homeTown']} // Criado em: ${ objetoJSON['formed'] }.`
+			header.appendChild(pResidencia)
+		}
+
+		function mostrarHerois(objetoJSON) {
+			let herois = objetoJSON['members']
+			let heroi = null
+
+			for (let indice in herois) {
+				heroi = herois[indice]
+
+				let h2NomeHeroi = getElementoHTML('h2', heroi.name)
+
+				let identidade = `Identidade secreta: ${ heroi.secretIdentity }.`
+				let pIdentidade = getElementoHTML('p', identidade)
+
+				let idade = `Idade: ${ heroi.age }`
+				let pIdade = getElementoHTML('p', idade)
+
+				let pSuperPoderes = getElementoHTML('p', 'Super poderes:')
+
+				let ulPoderes = document.createElement('ul')
+				let poderes = heroi.powers
+				for (let iPoder in poderes) {
+					let poder = poderes[iPoder]
+					let liPoder = getElementoHTML('li', poder)
+					ulPoderes.appendChild(liPoder)
+				}
+
+				let articleHeroi = document.createElement('article')
+				setElementoHTML(articleHeroi, [h2NomeHeroi, pIdentidade, pIdade, pSuperPoderes, ulPoderes])
+
+				section.appendChild(articleHeroi)
+			}
+		}
+    </script>
+  </body>
+</html>
