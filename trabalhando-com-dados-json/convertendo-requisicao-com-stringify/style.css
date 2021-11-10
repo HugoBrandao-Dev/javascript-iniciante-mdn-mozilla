@@ -1,0 +1,24 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-size: 100%;
+	font-family: Tahoma;
+	font-weight: normal;
+}
+
+input, button {
+	padding: 5px 10px;
+}
+
+h1 {
+	font-size: 2rem;
+}
+
+small {
+	font-size: 0.7rem;
+}
+
+#entrada-api {
+	margin: 30px 0px;
+}

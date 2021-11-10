@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./style.css">
+	<title>Convertendo requisição com stringify</title>
+</head>
+<body>
+	<h1>Convertendo requisição com stringify</h1>
+	<div id="entrada-api">
+		Informe a url da api:
+		<input type="url" name="url-link-api" placeholder="URL da api">
+		<button type="button" id="btn-converter">Converter</button><br>
+		<!-- 
+		A API do GitHub retorna um objeto, sendo possível fazer 
+		conversão para uma string 
+		-->
+		<small>Ex: https://api.github.com/users/{ USUÁRIO ALEATÓRIO }</small>
+	</div>
+	<div id="resultado">
+
+	</div>
+
+	<script>
+		let btnConverter = document.querySelector('button#btn-converter')
+		btnConverter.onclick = function() {
+			let iptURLRequisicao = document.getElementsByName('url-link-api')[0]
+
+			let URLRequisicao = iptURLRequisicao.value
+			if (URLRequisicao.length > 0) {
+				const requisicao = new XMLHttpRequest()
+				requisicao.open('GET', URLRequisicao)
+				requisicao.responseType = 'json'
+				requisicao.send()
+
+				requisicao.onload = function() {
+					let divResultado = document.querySelector('div#resultado')
+					
+					let textoRespostaAPI = requisicao.response
+					let resposta = JSON.stringify(textoRespostaAPI)
+					divResultado.innerHTML = resposta
+				}
+			} else {
+				alert('Informe um valor no campo da URL.')
+			}
+		}
+	</script>
+</body>
+</html>
